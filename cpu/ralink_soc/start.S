@@ -2350,7 +2350,8 @@ tRFCinit:
 #endif
 
 
-#if defined(RT2880_FPGA_BOARD) || defined(RT2880_ASIC_BOARD)
+#if defined(RT2880_FPGA_BOARD) || defined(RT2880_ASIC_BOARD) \
+    || defined(MT7628_FPGA_BOARD) || defined(MT7628_ASIC_BOARD)
 	li	t0, CONF_CM_UNCACHED
 	mtc0	t0, CP0_CONFIG
 
