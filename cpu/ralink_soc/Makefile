@@ -32,12 +32,11 @@ START	= start.o
 endif
 
 OBJS	= cpu.o
-SOBJS	= cache.o
 
 all:	.depend $(START) $(LIB)
 
-$(LIB):	$(OBJS) $(SOBJS)
-	$(AR) crv $@ $(OBJS) $(SOBJS)
+$(LIB):	$(OBJS)
+	$(AR) crv $@ $(OBJS)
 
 #########################################################################
 
