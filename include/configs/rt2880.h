@@ -50,7 +50,7 @@
 
 #define CONFIG_WEBGPIO 46
 
-#define CONFIG_GPIOENABLED yes
+#define CONFIG_GPIOENABLED no
 
 /* valid baudrates */
 #define CFG_BAUDRATE_TABLE	{ 9600, 19200, 38400, 57600, 115200, 230400, 460800 }
