@@ -94,7 +94,7 @@ function print_data_array() {
 	`echo -ne "$_file_content" >> "$files_content_tmp"`
 
 	# And close declaration
-	`echo -ne ", 0 };\n\n" >> "$files_content_tmp"`
+	`echo -ne "0 };\n\n" >> "$files_content_tmp"`
 }
 
 # $1 -> file path
