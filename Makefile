@@ -298,7 +298,7 @@ ifneq ($(MT7621_MP), y)
 uboot.img:	uboot.bin
 ifeq ($(CFG_ENV_IS), IN_SPI)
 		./tools/mkimage -A $(ARCH) -T standalone -C none \
-		-a $(TEXT_BASE) -e $(shell readelf -h u-boot | grep "Entry" | awk '{print $$4}') \
+		-a $(TEXT_BASE) -e $(shell LANG=C readelf -h u-boot | grep "Entry" | awk '{print $$4}') \
 		-n "$(shell echo $(CFG_ENV_IS) | sed -e 's/IN_//') Flash Image" \
 		-r $(DRAM_TYPE) -s $(DRAM_TOTAL_WIDTH) -t $(DRAM_SIZE) -u $(DRAM_WIDTH) \
 		-y $(DRAM_SYSCFG0) -z $(DRAM_SYSCFG1) -w $(CPU_PLL_CFG) -d $< $@
@@ -359,13 +359,13 @@ u-boot.dis:	u-boot
 #		$(LD) $(LDFLAGS) $$UNDEF_SYM $(OBJS) \
 #			--start-group $(LIBS) --end-group -L $(shell dirname) $(CC) $(CFLAGS) -print-libgcc-file-name -lgcc \
 #			-Map u-boot.map -o u-boot 
-			
+
 u-boot:		depend $(SUBDIRS) $(OBJS) $(LIBS) $(LDSCRIPT)
 		UNDEF_SYM=`$(OBJDUMP) -x $(LIBS) |sed  -n -e 's/.*\(__u_boot_cmd_.*\)/-u\1/p'|sort|uniq`;\
 		$(LD) $(LDFLAGS) $$UNDEF_SYM $(OBJS) \
 			--start-group $(LIBS) --end-group $(PLATFORM_LIBS) \
 			-Map u-boot.map -o u-boot
-			
+
 show_path:
 	echo $(OBJDUMP)
 
@@ -374,8 +374,8 @@ $(LIBS):
 		echo $(MAKE) -C `dirname $@`
 
 $(SUBDIRS):
-		$(MAKE) -C $@ all
 		echo $(MAKE) -C $@ all
+		$(MAKE) -C $@ all
 
 gdbtools:
 		$(MAKE) -C tools/gdb || exit 1
